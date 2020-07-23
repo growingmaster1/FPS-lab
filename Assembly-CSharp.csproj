@@ -69,6 +69,12 @@
     <Compile Include="Assets\Easy FPS\Scripts\GunScript.cs" />
     <Compile Include="Assets\Easy FPS\Scripts\MouseLookScript.cs" />
     <Compile Include="Assets\Easy FPS\Scripts\PlayerMovementScript.cs" />
+    <Compile Include="Assets\script\Controller.cs" />
+    <Compile Include="Assets\script\FlashingCube.cs" />
+    <Compile Include="Assets\script\MagicCube.cs" />
+    <Compile Include="Assets\script\WeaponManager.cs" />
+    <Compile Include="Assets\script\gun.cs" />
+    <Compile Include="Assets\script\sniperscope.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

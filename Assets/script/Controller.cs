@@ -9,7 +9,8 @@ public class Controller : MonoBehaviour
     public int totalhp;
     void Start()
     {
-        
+        totalhp = 50;
+        hp = totalhp;
     }
 
     // Update is called once per frame

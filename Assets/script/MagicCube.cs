@@ -10,9 +10,9 @@ public class MagicCube : MonoBehaviour
         //自身属性
     public int hp;
     public int totalhp;
-    public int cd;//技能冷却时间
+    public float cd;//技能冷却时间
     private double cdTimer;//cd计时器
-    public double resistance;//伤害抗性
+    //public double resistance;//伤害抗性
     public float speed;
     //public bool activated;
 
@@ -22,7 +22,7 @@ public class MagicCube : MonoBehaviour
     public double timer;//射击时间间隔
     private double countTimer;
     public float  AccurancyRange;//射击范围
-    private RaycastHit e_hit;
+    //private RaycastHit e_hit;
 
     //射击部分
     private GameObject Controller;//获取主角对象
@@ -41,10 +41,11 @@ public class MagicCube : MonoBehaviour
     public float moveTimer;//移动改方向平均间隔时间
     public float moveTimerChange;//改方向变化
     private float countMoveTimer;//计时器
-    private Vector3 moveToPoint;//移动目标点
-    private float viewAngle;//判断方块相对人物位置
+    //private Vector3 moveToPoint;//移动目标点
+    //private float viewAngle;//判断方块相对人物位置
     private Vector3 positionDir;//方块相对人物方向向量
     private bool shooting;//是否射击模式
+    private bool moving;
     private bool backShooting;//是否偷袭模式
     void Start()
     {
@@ -57,6 +58,7 @@ public class MagicCube : MonoBehaviour
         countTimer = 0;
         countMoveTimer = 0;
         shooting = false;
+        moving = false;
         backShooting = false;
     }
     // Update is called once per frame
@@ -135,6 +137,7 @@ public class MagicCube : MonoBehaviour
         }
         //刷新各个统计值
         shooting = false;
+        moving = false;
         countMoveTimer = 0;
         countTimer = 0;
     }
@@ -180,6 +183,7 @@ public class MagicCube : MonoBehaviour
     //移动代码
     void MoveMeantime()
     {
+        moving = true;
         //移动时加上重力，实现“击落”效果，且抛物线加大射击难度
         gameObject.GetComponent<Rigidbody>().useGravity = true;
         //移动方向
@@ -202,10 +206,10 @@ public class MagicCube : MonoBehaviour
                 {
                     moveDir.y = 90;
                 }
-                while(!(Vector3 .Angle ( moveDir,positionDir )>45&& Vector3.Angle(moveDir, positionDir) <150))
+               /* while(!(Vector3 .Angle ( moveDir,positionDir )>45&& Vector3.Angle(moveDir, positionDir) <150))
                 {
                     moveDir = RandVector3();
-                }
+                }*/
                 Physics.Raycast(this.transform.position, moveDir, out moveToTry[i]);
             }
             moveTo = moveToTry[0];
@@ -222,6 +226,14 @@ public class MagicCube : MonoBehaviour
         else
         {
             countMoveTimer -= Time.deltaTime;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(moving )
+        {
+            countMoveTimer = 0;
         }
     }
 
